@@ -1,23 +1,26 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
-
+//为什么仓库repositories需要声明两次，这其实是由于它们作用不同，buildscript中的仓库是gradle脚本自身需要的资源，而allprojects下的仓库是项目所有模块需要的资源
 buildscript {
+    //构建过程依赖的仓库
     repositories {
-        jcenter()
+        jcenter()//声明仓库源,默认是jcenter,jcenter可以理解成是一个新的中央远程仓库
     }
+    //构建过程需要依赖的库
     dependencies {
+        //下面声明的是gradle插件的版本
         classpath 'com.android.tools.build:gradle:2.3.1'
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
 }
-
+//这里面配置整个项目依赖的仓库，这样每个module就不用配置仓库了
 allprojects {
     repositories {
         jcenter()
     }
 }
-
+//声明了一个任务,任务名叫clean（也可以改为其它），任务类型是Delete（也可以是Copy），就是每当修改settings.gradle文件后点击同步，就会删除rootProject.buildDir下的文件
 task clean(type: Delete) {
     delete rootProject.buildDir
 }

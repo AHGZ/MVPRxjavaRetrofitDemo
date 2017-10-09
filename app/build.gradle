@@ -1,30 +1,36 @@
+//声明插件，这是一个android程序，如果是android库，应该是com.android.library
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion '25.0.3'
+    //安卓构建过程需要配置的参数
+    compileSdkVersion 25//编译版本
+    buildToolsVersion '25.0.3'//buildtool版本android构建工具的版本,buildToolsVersion的版本需要>=CompileSdkVersion; 高版本的build-tools 可以构建低版本编译的android程序
     defaultConfig {
-        applicationId "com.hgz.test.mvprxjavaretrofitdemo"
-        minSdkVersion 14
-        targetSdkVersion 26
-        versionCode 1
-        versionName "1.0"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        //默认配置，会同时应用到debug和release版本上
+        applicationId "com.hgz.test.mvprxjavaretrofitdemo"//包名
+        minSdkVersion 14// 	应用支持的最小Android SDk版本
+        targetSdkVersion 26//应用目标版本，Android studio会根据当前版本提示相应的警告信息
+        versionCode 1//用一个整数表示当前app的版本，用以升级使用
+        versionName "1.0"//用一个字符表示当前app版本名称，用以升级使用
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"//使用AndroidJUnitRunner进行测试的时候,需配置
     }
     buildTypes {
+        //这里面可以配置debug和release版本的一些参数，比如混淆、签名配置等
         release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            //release版本
+            minifyEnabled false//是否开启混淆
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'//混淆文件位置
         }
     }
 }
 
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
+    //模块依赖
+    compile fileTree(include: ['*.jar'], dir: 'libs')//依赖libs目录下所有jar包
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
-        exclude group: 'com.android.support', module: 'support-annotations'
+        exclude group: 'com.android.support', module: 'support-annotations'//使用AndroidJUnitRunner进行测试的时候,需配置
     })
-    compile 'com.android.support:appcompat-v7:26.+'
+    compile 'com.android.support:appcompat-v7:26.+'//依赖appcompat库
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     testCompile 'junit:junit:4.12'
     compile 'io.reactivex.rxjava2:rxjava:+'
